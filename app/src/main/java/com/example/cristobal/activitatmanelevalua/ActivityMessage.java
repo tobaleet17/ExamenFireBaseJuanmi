@@ -1,9 +1,10 @@
 package com.example.cristobal.activitatmanelevalua;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+
 import android.os.Bundle;
 
-public class ActivityMessage extends AppCompatActivity {
+public class ActivityMessage extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

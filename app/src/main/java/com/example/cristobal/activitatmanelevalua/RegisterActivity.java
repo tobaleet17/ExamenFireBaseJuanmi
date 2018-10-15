@@ -1,7 +1,7 @@
 package com.example.cristobal.activitatmanelevalua;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
 
     private EditText inptNombre;
     private EditText inptApellidos;
@@ -33,40 +33,32 @@ public class RegisterActivity extends AppCompatActivity {
         inptPassword = (EditText) findViewById(R.id.txtPass);
         inptTelefono = (EditText) findViewById(R.id.txtTelefon);
         inptUser = (EditText) findViewById(R.id.txtUserName);
-        inptEnviar = (Button) findViewById(R.id.boton_enviar);
+        inptEnviar = (Button) findViewById(R.id.btnRegister);
         inptCancelar = (Button) findViewById(R.id.btnCancelar);
 
-        if (inptPassword.getText().toString().isEmpty()
-                || inptEmail.getText().toString().isEmpty()
-                || inptApellidos.getText().toString().isEmpty()
-                || inptNombre.getText().toString().isEmpty()
-                || inptTelefono.getText().toString().isEmpty()
-                || inptUser.getText().toString().isEmpty()) {
 
-
-
-
-
-        }else{
             inptEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("llegosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-                    miLista.add(inptUser.getText().toString());
-                    miLista.add(inptNombre.getText().toString());
-                    miLista.add(inptApellidos.getText().toString());
-                    miLista.add(inptEmail.getText().toString());
-                    miLista.add(inptTelefono.getText().toString());
-                    miLista.add(inptPassword.getText().toString());
 
-                    Intent cambioOK = new Intent(getApplicationContext(),ActivityLogin.class);
-                    //cambioOK.putExtra("pepe",miLista);
-                    RegisterActivity.this.startActivity(cambioOK);
-                    //Intent itemintent = new Intent(getApplicationContext(), ActivityMessage.class);
-                    //RegisterActivity.this.startActivity(itemintent);
+                    if (inptPassword.getText().toString().trim().isEmpty()
+                            || inptEmail.getText().toString().isEmpty()
+                            || inptApellidos.getText().toString().isEmpty()
+                            || inptNombre.getText().toString().isEmpty()
+                            || inptTelefono.getText().toString().isEmpty()
+                            || inptUser.getText().toString().isEmpty()) {
+                        Intent cambioOK = new Intent(getApplicationContext(), ActivityMessage.class);
+                        RegisterActivity.this.startActivity(cambioOK);
+                    } else {
 
+                        Intent cambioOK = new Intent(getApplicationContext(), ActivityLogin.class);
+                        //cambioOK.putExtra("pepe",miLista);
+                        RegisterActivity.this.startActivity(cambioOK);
+                        //Intent itemintent = new Intent(getApplicationContext(), ActivityMessage.class);
+                        //RegisterActivity.this.startActivity(itemintent);
+
+                    }
                 }
             });
         }
     }
-}

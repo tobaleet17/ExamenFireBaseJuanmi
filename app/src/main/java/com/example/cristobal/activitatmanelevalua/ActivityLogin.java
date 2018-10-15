@@ -1,7 +1,7 @@
 package com.example.cristobal.activitatmanelevalua;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ActivityLogin extends AppCompatActivity {
+public class ActivityLogin extends Activity {
 
     private EditText inputLogin;
     private EditText inputPassword;
@@ -28,7 +28,7 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ArrayList<String> lista = (ArrayList<String>) getIntent().getSerializableExtra("pepe");
+        //ArrayList<String> lista = (ArrayList<String>) getIntent().getSerializableExtra("pepe");
 
 
 
@@ -47,7 +47,7 @@ public class ActivityLogin extends AppCompatActivity {
                 if (Usuarios.contains(login)== true && Password.contains(pass)==true){
                     Intent itemintent = new Intent(getApplicationContext(), ActivityMessage.class);
                     ActivityLogin.this.startActivity(itemintent);
-
+                    Usuario u1=new Usuario();
                 }
 
             }
