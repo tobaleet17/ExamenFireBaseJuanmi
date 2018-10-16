@@ -41,6 +41,16 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="Password" />
+    <Button
+        android:id="@+id/boton_enviar"
+        style="?android:attr/buttonStyleInset"
+        android:layout_width="105dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:layout_weight="1"
+        android:text="Enviar" />
 
     <Button
         android:id="@+id/boton_registrar"
@@ -53,16 +63,7 @@
         android:paddingRight="15dp"
         android:text="Registrar" />
 
-    <Button
-        android:id="@+id/boton_enviar"
-        style="?android:attr/buttonStyleInset"
-        android:layout_width="105dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:layout_weight="1"
-        android:text="Enviar" />
+
 
 </LinearLayout>
 

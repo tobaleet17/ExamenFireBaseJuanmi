@@ -3,6 +3,8 @@ package com.example.cristobal.activitatmanelevalua;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +22,6 @@ public class RegisterActivity extends Activity {
     private Button inptEnviar;
     private Button inptCancelar;
 
-    ArrayList<String> miLista = new ArrayList<String>();
 
 
     @Override
@@ -41,23 +42,36 @@ public class RegisterActivity extends Activity {
                 @Override
                 public void onClick(View v) {
 
+
                     if (inptPassword.getText().toString().trim().isEmpty()
                             || inptEmail.getText().toString().isEmpty()
                             || inptApellidos.getText().toString().isEmpty()
                             || inptNombre.getText().toString().isEmpty()
                             || inptTelefono.getText().toString().isEmpty()
                             || inptUser.getText().toString().isEmpty()) {
-                        Intent cambioOK = new Intent(getApplicationContext(), ActivityMessage.class);
-                        RegisterActivity.this.startActivity(cambioOK);
+
+
+
                     } else {
 
-                        Intent cambioOK = new Intent(getApplicationContext(), ActivityLogin.class);
-                        //cambioOK.putExtra("pepe",miLista);
-                        RegisterActivity.this.startActivity(cambioOK);
-                        //Intent itemintent = new Intent(getApplicationContext(), ActivityMessage.class);
-                        //RegisterActivity.this.startActivity(itemintent);
+                        Usuario u1=new Usuario(Integer.parseInt(inptTelefono.getText().toString()),inptEmail.getText().toString(),inptPassword.getText().toString(),inptNombre.getText().toString(),inptApellidos.getText().toString(),Integer.parseInt(inptUser.getText().toString()));
+
+                        Intent cambioOK = new Intent();
+                        cambioOK.putExtra("user",u1);
+                        setResult(RESULT_OK,cambioOK);
+                        finish();
 
                     }
+                }
+            });
+            inptCancelar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent cambioOK = new Intent();
+                    setResult(RESULT_CANCELED,cambioOK);
+                    finish();
+
                 }
             });
         }
