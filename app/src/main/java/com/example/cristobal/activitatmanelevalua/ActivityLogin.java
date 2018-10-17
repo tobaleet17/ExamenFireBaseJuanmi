@@ -28,6 +28,8 @@ public class ActivityLogin extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Usuario u2= new Usuario(654321098,"mviel@florida-uni.es","1234,","Manel","Viel",1);
+        Usuarios.add(u2);
 
 
         inputLogin = (EditText) findViewById(R.id.input_Login);
