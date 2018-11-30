@@ -58,6 +58,27 @@
         android:textColorHint="@color/colorPrimary"/>
 
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioFemella"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Femella" />
+
+        <RadioButton
+            android:id="@+id/radioMascle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Mascle" />
+    </RadioGroup>
+
     <Button android:id="@+id/btnRegister"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"

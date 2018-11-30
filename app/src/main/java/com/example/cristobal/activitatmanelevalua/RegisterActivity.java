@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class RegisterActivity extends Activity {
     private EditText inptUser;
     private Button inptEnviar;
     private Button inptCancelar;
+    private RadioButton sexe;
+    private RadioButton sexe2;
 
 
 
@@ -36,6 +39,8 @@ public class RegisterActivity extends Activity {
         inptUser = (EditText) findViewById(R.id.txtUserName);
         inptEnviar = (Button) findViewById(R.id.btnRegister);
         inptCancelar = (Button) findViewById(R.id.btnCancelar);
+        sexe= (RadioButton) findViewById(R.id.radioFemella);
+        sexe2= (RadioButton) findViewById(R.id.radioMascle);
 
 
             inptEnviar.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +69,8 @@ public class RegisterActivity extends Activity {
                     }
                 }
             });
+
+
             inptCancelar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
