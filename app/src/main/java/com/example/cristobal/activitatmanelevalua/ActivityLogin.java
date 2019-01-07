@@ -30,6 +30,7 @@ public class ActivityLogin extends Activity {
     private EditText inputPassword;
     private Button inputEnviar;
     private Button inputRegistrar;
+    private Button inputModificar;
     private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
     private FirebaseAuth mAuth;
     private boolean comprobar=true;
@@ -52,6 +53,18 @@ public class ActivityLogin extends Activity {
         inputPassword = (EditText) findViewById(R.id.input_Password);
         inputEnviar = (Button) findViewById(R.id.boton_enviar);
         inputRegistrar = (Button) findViewById(R.id.boton_registrar);
+        inputModificar = (Button) findViewById(R.id.boton_modificar);
+
+        inputModificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i1 = new Intent(getApplicationContext(),Modificar.class);
+                ActivityLogin.this.startActivity(i1);
+
+            }
+        });
+
 
         inputEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
