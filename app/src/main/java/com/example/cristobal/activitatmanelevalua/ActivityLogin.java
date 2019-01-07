@@ -14,6 +14,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,9 +32,11 @@ public class ActivityLogin extends Activity {
     private Button inputRegistrar;
     private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
     private FirebaseAuth mAuth;
+    private boolean comprobar=true;
+    Usuario u2;
     String mensaje="ERROR";
     String mensaje2="ACCESO PERMITIDO";
-
+    DatabaseReference bbdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +44,8 @@ public class ActivityLogin extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Usuario u2= new Usuario(654321098,"mviel@florida-uni.es","1234,","Manel","Viel",1);
-        Usuarios.add(u2);
+
+
 
 
         inputLogin = (EditText) findViewById(R.id.input_Login);
@@ -91,20 +99,50 @@ public class ActivityLogin extends Activity {
 
         if(requestCode == 1 && resultCode == RegisterActivity.RESULT_OK){
 
-             Usuario u2 = data.getExtras().getParcelable("user"); //Aquí con el data del intent del Register cogemos los datos
+             u2 = data.getExtras().getParcelable("user"); //Aquí con el data del intent del Register cogemos los datos
 
             Usuarios.add(u2);
 
-            registrar(u2.getEmail(),u2.getPass());
+            registrar(u2);
 
         }
 
         }
 
-        private void registrar(String email, String password){
+        private void registrar(final Usuario u2){
 
             mAuth = FirebaseAuth.getInstance();
-            mAuth.createUserWithEmailAndPassword(email, password)
+            bbdd = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+            Query q = bbdd.orderByChild("nombre");
+
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot aux: dataSnapshot.getChildren() ){
+
+                        Usuario up = aux.getValue(Usuario.class);
+                        String nomRecog = up.getNombre();
+                        if (u2.getNombre().compareTo(nomRecog)==0){
+
+                            Toast.makeText(ActivityLogin.this, "El usuario "+u2.getNombre()+" ya existe.",
+                                    Toast.LENGTH_LONG).show();
+                            comprobar = false;
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            mAuth.createUserWithEmailAndPassword(u2.getEmail(), u2.getPass())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -112,7 +150,17 @@ public class ActivityLogin extends Activity {
                                 // Sign in success, update UI with the signed-in user's information
 
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(ActivityLogin.this, "Authentication Correcta. "+user.getEmail(),Toast.LENGTH_LONG).show();
+
+
+                                Toast.makeText(ActivityLogin.this, "Authentication Correcta. "+user.getUid(),Toast.LENGTH_LONG).show();
+                                if (comprobar){
+
+                                    String clave = user.getUid();
+
+                                    bbdd.child(clave).setValue(u2); //con esto insertamos los datos del usuario.
+
+                                }
+
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -127,5 +175,6 @@ public class ActivityLogin extends Activity {
                     });
 
         }
+
 
 }

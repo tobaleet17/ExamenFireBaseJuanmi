@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -43,6 +50,7 @@ public class RegisterActivity extends Activity {
         sexe2= (RadioButton) findViewById(R.id.radioMascle);
 
 
+
             inptEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,10 +66,10 @@ public class RegisterActivity extends Activity {
 
 
                     } else {
+                        Intent cambioOK = new Intent();
 
                         Usuario u1=new Usuario(Integer.parseInt(inptTelefono.getText().toString()),inptEmail.getText().toString(),inptPassword.getText().toString(),inptNombre.getText().toString(),inptApellidos.getText().toString(),Integer.parseInt(inptUser.getText().toString()));
 
-                        Intent cambioOK = new Intent();
                         cambioOK.putExtra("user",u1);
                         setResult(RESULT_OK,cambioOK);
                         finish();
