@@ -1,9 +1,9 @@
-package com.example.cristobal.activitatmanelevalua;
+package com.example.cristobal.activitatmanelevalua.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class Usuario implements Parcelable {
+public class Usuario implements Parcelable {
     private int telefono;
     private String email;
     private String pass;

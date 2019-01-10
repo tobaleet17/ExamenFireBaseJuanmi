@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cristobal.activitatmanelevalua.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -72,25 +74,34 @@ public class ActivityLogin extends Activity {
                 String login = inputLogin.getText().toString();
                 String pass = inputPassword.getText().toString();
 
-                Iterator<Usuario> iter1= Usuarios.iterator();
-
-                while (iter1.hasNext())
-                {
-                    Usuario u1 = (Usuario) iter1.next();
-
-                    if ((login.compareTo(u1.getEmail())==0) && (pass.compareTo(u1.getPass())==0)){
 
 
-                        Intent itemintent = new Intent(getApplicationContext(), ActivityMessage.class);
-                        ActivityLogin.this.startActivity(itemintent);
-                        Toast.makeText(getApplicationContext(), ""+mensaje2, Toast.LENGTH_SHORT).show();
-                    }else{
+                login(login,pass);
 
-                        Toast.makeText(getApplicationContext(), ""+mensaje, Toast.LENGTH_SHORT).show();
 
-                    }
 
-                }
+
+
+
+                //Iterator<Usuario> iter1= Usuarios.iterator();
+
+                //while (iter1.hasNext())
+                //{
+                  //  Usuario u1 = (Usuario) iter1.next();
+
+                    //if ((login.compareTo(u1.getEmail())==0) && (pass.compareTo(u1.getPass())==0)){
+
+                      //  Log.d("prueba","entra enviar");
+
+
+                        //Toast.makeText(getApplicationContext(), ""+mensaje2, Toast.LENGTH_SHORT).show();
+                    //}else{
+
+                      //  Toast.makeText(getApplicationContext(), ""+mensaje, Toast.LENGTH_SHORT).show();
+
+                    //}
+
+                //}
 
 
             }
@@ -165,7 +176,7 @@ public class ActivityLogin extends Activity {
                                 FirebaseUser user = mAuth.getCurrentUser();
 
 
-                                Toast.makeText(ActivityLogin.this, "Authentication Correcta. "+user.getUid(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(ActivityLogin.this, "Registro correcto. "+user.getUid(),Toast.LENGTH_LONG).show();
                                 if (comprobar){
 
                                     String clave = user.getUid();
@@ -188,6 +199,41 @@ public class ActivityLogin extends Activity {
                     });
 
         }
+        public void login(String email,String password){
 
+
+            mAuth = FirebaseAuth.getInstance();
+            bbdd = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+            Query q = bbdd.orderByChild("nombre");
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("prueba entrada", "signInWithEmail:success");
+
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent itemintent = new Intent(getApplicationContext(), anyadir_producto.class);
+                                ActivityLogin.this.startActivity(itemintent);
+                                Toast.makeText(ActivityLogin.this, "Authentication correcta. "+user.getUid(),
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("prueba fallida", "signInWithEmail:failure");
+                                Toast.makeText(ActivityLogin.this, "Authentication failed. "+task.getException(),
+                                        Toast.LENGTH_LONG).show();
+
+                            }
+
+
+                        }
+                    });
+
+
+
+
+        }
 
 }

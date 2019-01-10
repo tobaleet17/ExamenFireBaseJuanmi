@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ActivitatManelEvalua</string>
+    <string name="anyadir_prod">Añadir producto</string>
+    <string name="precio_prod">Precio del producto...</string>
 </resources>
