@@ -42,10 +42,16 @@
         android:text="@string/anyadir_prod"/>
 
     <Button
-        android:id="@+id/btnEliminarProducto"
+        android:id="@+id/btnListarProducto"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Eliminar producto"/>
+        android:text="Listar Producto"/>
+    <Button
+        android:id="@+id/btnSalirAnyadir"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="SALIR"/>
 
 </LinearLayout>

@@ -19,7 +19,8 @@
         <activity android:name=".ActivityMessage" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Modificar" />
-        <activity android:name=".anyadir_producto"></activity>
+        <activity android:name=".anyadir_producto" />
+        <activity android:name=".ModificarProducto"></activity>
     </application>
 
 </manifest>

@@ -61,7 +61,7 @@ public class Modificar extends AppCompatActivity {
 
             }
         });
-        btnElim.setOnClickListener(new View.OnClickListener() {
+        btnModifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

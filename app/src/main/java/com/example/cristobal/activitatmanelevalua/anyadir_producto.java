@@ -1,5 +1,6 @@
 package com.example.cristobal.activitatmanelevalua;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cristobal.activitatmanelevalua.model.Producto;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +23,7 @@ public class anyadir_producto extends AppCompatActivity {
     Spinner spCategorias;
     DatabaseReference bbdd2;
     EditText Nombre,Descripcion,Precio;
-    Button anyadir;
+    Button anyadir,listar,salir;
     private FirebaseAuth mAuth;
 
     @Override
@@ -33,10 +35,18 @@ public class anyadir_producto extends AppCompatActivity {
         Descripcion = (EditText) findViewById(R.id.edit_Descripcion);
         Precio = (EditText) findViewById(R.id.edit_Precio);
         anyadir = (Button) findViewById(R.id.btnAñadirProducto);
+        listar = (Button) findViewById(R.id.btnListarProducto);
+        salir = (Button) findViewById(R.id.btnSalirAnyadir);
 
         spCategorias = (Spinner) findViewById(R.id.spCategorias);
         cargarSpinner();
 
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         anyadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,17 +56,22 @@ public class anyadir_producto extends AppCompatActivity {
                 String descripcion = Descripcion.getText().toString();
                 String categoria = spCategorias.getSelectedItem().toString();
                 String precio = Precio.getText().toString();
-                int id = Integer.valueOf(user.getUid());
 
-                bbdd2 = FirebaseDatabase.getInstance().getReference("Productos");
+                String id = user.getUid();
+                Toast.makeText(anyadir_producto.this, "El usuario "+user.getUid(),
+                        Toast.LENGTH_LONG).show();
+
+
 
 
                 if (!TextUtils.isEmpty(nombre) || !TextUtils.isEmpty(descripcion) || !TextUtils.isEmpty(categoria)|| !TextUtils.isEmpty(precio)){
 
 
-
+                    bbdd2 = FirebaseDatabase.getInstance().getReference("Productos");
 
                     Producto p1 = new Producto(precio,nombre,descripcion,id,categoria);
+                    String clave = bbdd2.push().getKey();
+                    bbdd2.child(clave).setValue(p1);
 
 
 
@@ -65,6 +80,18 @@ public class anyadir_producto extends AppCompatActivity {
             }
         });
 
+        listar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentListar = new Intent(getApplicationContext(),ModificarProducto.class);
+
+                startActivity(intentListar);
+
+
+
+            }
+        });
 
         }
 

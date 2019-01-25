@@ -1,15 +1,24 @@
+
+
 package com.example.cristobal.activitatmanelevalua.model;
 
-public class Producto {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Producto implements Parcelable {
 
 
     private String precio;
     private String nombre;
     private String descripcion;
-    private int userID;
+    private String userID;
     private String categoria;
 
-    public Producto(String precio, String nombre, String descripcion, int userID, String categoria) {
+    public Producto(){
+
+    }
+
+    public Producto(String precio, String nombre, String descripcion, String userID, String categoria) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -41,11 +50,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -57,4 +66,41 @@ public class Producto {
         this.categoria = categoria;
     }
 
+
+    protected Producto(Parcel in) {
+        precio = in.readString();
+        nombre = in.readString();
+        descripcion = in.readString();
+        userID = in.readString();
+        categoria = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(precio);
+        dest.writeString(nombre);
+        dest.writeString(descripcion);
+        dest.writeString(userID);
+        dest.writeString(categoria);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Producto> CREATOR = new Parcelable.Creator<Producto>() {
+        @Override
+        public Producto createFromParcel(Parcel in) {
+            return new Producto(in);
+        }
+
+        @Override
+        public Producto[] newArray(int size) {
+            return new Producto[size];
+        }
+    };
 }
