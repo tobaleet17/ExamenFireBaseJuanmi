@@ -1,5 +1,6 @@
 package com.example.cristobal.activitatmanelevalua;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class ModificarProducto extends AppCompatActivity {
         btnEliminar = (Button) findViewById(R.id.btn_ElimProd);
         btnSalir = (Button) findViewById(R.id.btn_SalirListar);
         editEliminar = (EditText) findViewById(R.id.editEliminar);
+
 
         bbdd = FirebaseDatabase.getInstance().getReference("Productos");
 
@@ -99,6 +101,8 @@ public class ModificarProducto extends AppCompatActivity {
 
             }
         });
+
+
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,19 +9,22 @@ public class Usuario implements Parcelable {
     private String pass;
     private String nombre;
     private String apellidos;
+    private String seguir;
     private int userID;
 
-    public Usuario(int telefono, String email, String pass, String nombre, String apellidos, int userID) {
+    public Usuario(int telefono, String email, String pass, String nombre, String apellidos, int userID,String seguir) {
         this.telefono = telefono;
         this.email = email;
         this.pass = pass;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.userID = userID;
+        this.seguir = seguir;
     }
     public Usuario(){
 
     }
+
 
     public int getTelefono() {
         return telefono;
@@ -72,7 +75,13 @@ public class Usuario implements Parcelable {
         this.apellidos = apellidos;
     }
 
+    public String getSeguir() {
+        return seguir;
+    }
 
+    public void setSeguir(String seguir) {
+        this.seguir = seguir;
+    }
 
     protected Usuario(Parcel in) {
         telefono = in.readInt();
@@ -81,6 +90,7 @@ public class Usuario implements Parcelable {
         nombre = in.readString();
         apellidos = in.readString();
         userID = in.readInt();
+        seguir = in.readString();
     }
 
     @Override
@@ -96,6 +106,7 @@ public class Usuario implements Parcelable {
         dest.writeString(nombre);
         dest.writeString(apellidos);
         dest.writeInt(userID);
+        dest.writeString(seguir);
     }
 
     @SuppressWarnings("unused")

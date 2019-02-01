@@ -17,7 +17,7 @@
         android:id="@+id/editEliminar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:hint="Prodcuto a eliminar..."/>
+        android:hint="Prodcuto a eliminar...(por nombre)"/>
 
     <Button
         android:id="@+id/btn_SalirListar"

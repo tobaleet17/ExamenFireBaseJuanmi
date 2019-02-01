@@ -22,7 +22,7 @@ public class RegisterActivity extends Activity {
     private Button inptCancelar;
     private RadioButton sexe;
     private RadioButton sexe2;
-
+    private EditText inptSeguir;
 
 
     @Override
@@ -39,6 +39,8 @@ public class RegisterActivity extends Activity {
         inptCancelar = (Button) findViewById(R.id.btnCancelar);
         sexe= (RadioButton) findViewById(R.id.radioFemella);
         sexe2= (RadioButton) findViewById(R.id.radioMascle);
+        inptSeguir = (EditText) findViewById(R.id.txtSeguir);
+        String prueba="";
 
 
 
@@ -59,7 +61,7 @@ public class RegisterActivity extends Activity {
                     } else {
                         Intent cambioOK = new Intent();
 
-                        Usuario u1=new Usuario(Integer.parseInt(inptTelefono.getText().toString()),inptEmail.getText().toString(),inptPassword.getText().toString(),inptNombre.getText().toString(),inptApellidos.getText().toString(),Integer.parseInt(inptUser.getText().toString()));
+                        Usuario u1=new Usuario(Integer.parseInt(inptTelefono.getText().toString()),inptEmail.getText().toString(),inptPassword.getText().toString(),inptNombre.getText().toString(),inptApellidos.getText().toString(),Integer.parseInt(inptUser.getText().toString()),inptSeguir.getText().toString());
 
                         cambioOK.putExtra("user",u1);
                         setResult(RESULT_OK,cambioOK);

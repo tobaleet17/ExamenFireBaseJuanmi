@@ -23,7 +23,7 @@ public class anyadir_producto extends AppCompatActivity {
     Spinner spCategorias;
     DatabaseReference bbdd2;
     EditText Nombre,Descripcion,Precio;
-    Button anyadir,listar,salir;
+    Button anyadir,listar,salir,btnUsuarios;
     private FirebaseAuth mAuth;
 
     @Override
@@ -37,6 +37,7 @@ public class anyadir_producto extends AppCompatActivity {
         anyadir = (Button) findViewById(R.id.btnAñadirProducto);
         listar = (Button) findViewById(R.id.btnListarProducto);
         salir = (Button) findViewById(R.id.btnSalirAnyadir);
+        btnUsuarios = (Button) findViewById(R.id.btn_listarUsers);
 
         spCategorias = (Spinner) findViewById(R.id.spCategorias);
         cargarSpinner();
@@ -90,6 +91,13 @@ public class anyadir_producto extends AppCompatActivity {
 
 
 
+            }
+        });
+        btnUsuarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(getApplicationContext(),Modificar.class);
+                anyadir_producto.this.startActivity(i1);
             }
         });
 

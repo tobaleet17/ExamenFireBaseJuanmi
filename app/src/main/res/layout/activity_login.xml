@@ -62,7 +62,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="Registrar" />
-    <Button
+ <!--   <Button
         android:id="@+id/boton_modificar"
         style="?android:attr/buttonStyleInset"
         android:layout_width="105dp"
@@ -71,7 +71,7 @@
         android:layout_weight="1"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:text="Modificar" />
+        android:text="Modificar" />-->
 
 
 

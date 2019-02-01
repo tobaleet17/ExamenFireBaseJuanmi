@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.cristobal.activitatmanelevalua.model.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +28,14 @@ import java.util.ArrayList;
 public class Modificar extends AppCompatActivity {
 
     EditText EditUser, NombreNuevo;
-    Button btnElim, btnModifi, btnCanc;
+    Button btnElim, btnSeguir, btnCanc;
     CheckBox actEditUser;
     ListView lista;
     DatabaseReference bbdd;
+
+    private FirebaseAuth mAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class Modificar extends AppCompatActivity {
 
         bbdd = FirebaseDatabase.getInstance().getReference("Usuarios");
         btnCanc = (Button) findViewById(R.id.btn_Canc);
-        btnModifi = (Button) findViewById(R.id.btn_Editar);
+        btnSeguir = (Button) findViewById(R.id.btn_Seguir);
         btnElim = (Button) findViewById(R.id.btn_Elim);
         EditUser = (EditText) findViewById(R.id.EditUserNam);
         NombreNuevo = (EditText) findViewById(R.id.ModNom);
@@ -61,9 +67,11 @@ public class Modificar extends AppCompatActivity {
 
             }
         });
-        btnModifi.setOnClickListener(new View.OnClickListener() {
+        btnSeguir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+
 
                 String cadenaCogemos = EditUser.getText().toString();
 
@@ -77,8 +85,16 @@ public class Modificar extends AppCompatActivity {
 
                             //EL dataSnap contiene los UUID de los hijos, de cada usuario su identificador.
                             for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
                                 String key = dataSnap.getKey();
-                                bbdd.child(key).child("nombre").setValue(NombreNuevo.getText().toString());
+                               // bbdd.child(key).child("nombre").setValue(NombreNuevo.getText().toString());
+                                if (NombreNuevo.getText().toString().equals("Si"))
+                                {
+                                    bbdd.child(key).child("seguir").setValue(NombreNuevo.getText().toString() + " lo sigue " +user.getUid() );
+                                }else{
+                                    bbdd.child(key).child("seguir").setValue(NombreNuevo.getText().toString() + " lo sigue " );
+                                }
+
                             }
 
 
@@ -92,7 +108,14 @@ public class Modificar extends AppCompatActivity {
 
 
                 }
-                Toast.makeText(getApplicationContext(), "El nombre del user " + cadenaCogemos + " se ha modificado con éxito", Toast.LENGTH_LONG).show();
+                if (NombreNuevo.getText().toString().equals("Si"))
+                {
+                    Toast.makeText(getApplicationContext(), "Se ha COMENZADO a seguir a " + cadenaCogemos , Toast.LENGTH_LONG).show();
+                }else
+                {
+                    Toast.makeText(getApplicationContext(), "Se ha DEJADO DE seguir a " + cadenaCogemos , Toast.LENGTH_LONG).show();
+                }
+
 
 
             }
@@ -142,30 +165,63 @@ public class Modificar extends AppCompatActivity {
             }
         });
 
-        //CARGAMOS EL LIST VIEW PARA SABER EN TODO MOMENTO EL LISTADO DE USUARIOS....-->
+            //CARGAMOS EL LIST VIEW PARA SABER EN TODO MOMENTO EL LISTADO DE USUARIOS....-->
         bbdd.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mAuth = FirebaseAuth.getInstance();
 
-//NOS CREAMOS UN ARRAY ADAPTER PARA MOSTRARLO SOBRE EL LIST VIEW
+            //NOS CREAMOS UN ARRAY ADAPTER PARA MOSTRARLO SOBRE EL LIST VIEW
                 ArrayAdapter<String> adapter;
                 ArrayList<String> listado = new ArrayList<>();
 
                 for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
 
+                    FirebaseUser user = mAuth.getCurrentUser();
                     Usuario usuario = datasnapshot.getValue(Usuario.class);
+
 
                     String nombreUsuario = Integer.toString(usuario.getUserID());
 
                     String correo = usuario.getEmail();
                     String nombre = usuario.getNombre();
                     String apellidos = usuario.getApellidos();
+                    String seguir = usuario.getSeguir();
 
-                    listado.add("NOMBRE USUARIO:" + nombreUsuario);
-                    listado.add("NOMBRE: " + nombre);
-                    listado.add("APELLIDOS: " + apellidos);
-                    listado.add("DIRECCION: " + correo);
-                    listado.add("<------------------------------------->");
+                    String sCadena2 = usuario.getSeguir().toString();
+                    String subCadena2 = sCadena2.substring(0,12);
+
+                    if (!usuario.getSeguir().isEmpty() ){
+
+                        if (subCadena2.compareTo("No lo sigue ")==0)
+                        {
+                            listado.add("no sigue a nadie");
+                        }else {
+
+                            String sCadena = usuario.getSeguir().toString();
+                            String subCadena = sCadena.substring(12,40);
+                            Toast.makeText(getApplicationContext(), "la sub " + subCadena, Toast.LENGTH_LONG).show();
+                            if (subCadena.compareTo(user.getUid())==0){
+                                listado.add("NOMBRE USUARIO:" + nombreUsuario);
+                                listado.add("NOMBRE: " + nombre);
+                                listado.add("LO SIGUES: " + seguir);
+                                listado.add("APELLIDOS: " + apellidos);
+                                listado.add("DIRECCION: " + correo);
+                                listado.add("<------------------------------------->");
+
+                            }else{
+                                listado.add("sin nada");
+                            }
+                        }
+
+                    }
+
+
+
+
+
+
+
                 }
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listado);
                 lista.setAdapter(adapter);

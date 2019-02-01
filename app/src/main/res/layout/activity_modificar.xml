@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre a editar..."
+        android:hint="Nombre a seguir..."
         android:inputType="textPersonName"
         />
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Sí o No"
         android:inputType="textPersonName"
         />
 
@@ -52,10 +52,10 @@
 
 
     <Button
-        android:id="@+id/btn_Editar"
+        android:id="@+id/btn_Seguir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EDITAR" />
+        android:text="SEGUIR" />
 
     <Button
         android:id="@+id/btn_Elim"
