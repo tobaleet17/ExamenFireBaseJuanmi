@@ -197,7 +197,7 @@ public class Modificar extends AppCompatActivity {
                         {
                             listado.add("no sigue a nadie");
                         }else {
-
+//subida juanmi
                             String sCadena = usuario.getSeguir().toString();
                             String subCadena = sCadena.substring(12,40);
                             Toast.makeText(getApplicationContext(), "la sub " + subCadena, Toast.LENGTH_LONG).show();

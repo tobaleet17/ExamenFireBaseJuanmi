@@ -2678,11 +2678,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548442002201</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Subimos el examen de Juanmi, comparando los usuarios siguiéndolos.">
+      <created>1549036817205</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1549036817205</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="776" extended-state="7" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" />
@@ -2756,7 +2763,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Agregamos las clases ModificarProducto que es donde vamos a listar los productos y hacer las comprobaciones dentro del botón listarProducto con un IF comprobamos si el producto pertence a ese user.&#10;añadimos varios botones de Salir para salir del activity del anyadir_producto y modificarProducto.&#10;&#10;Y a la vez eliminamos por el NOMBRE." />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregamos las clases ModificarProducto que es donde vamos a listar los productos y hacer las comprobaciones dentro del botón listarProducto con un IF comprobamos si el producto pertence a ese user.&#10;añadimos varios botones de Salir para salir del activity del anyadir_producto y modificarProducto.&#10;&#10;Y a la vez eliminamos por el NOMBRE." />
+    <MESSAGE value="Subimos el examen de Juanmi, comparando los usuarios siguiéndolos." />
+    <option name="LAST_COMMIT_MESSAGE" value="Subimos el examen de Juanmi, comparando los usuarios siguiéndolos." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cristobal/activitatmanelevalua/Modificar.java">
